@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gujarat Business License Eligibility Checker — DGNM & Associates LLP</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1B3F8B;
+  --primary-light: #2E5AC8;
+  --primary-pale: #EEF2FB;
+  --saffron: #E8610A;
+  --saffron-light: #F07B30;
+  --saffron-pale: #FEF3EB;
+  --green: #0D7A4E;
+  --green-light: #E7F5EF;
+  --amber: #B45309;
+  --amber-light: #FEF3C7;
+  --slate: #475569;
+  --border: #E1E7EF;
+  --bg: #F4F7FB;
+  --white: #FFFFFF;
+  --navy: #0D1F3C;
+  --card-shadow: 0 2px 16px rgba(13,31,60,0.07);
+  --card-shadow-hover: 0 8px 32px rgba(13,31,60,0.13);
+  --radius: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+
+/* ══════════════════════════════════════════════════════════
+   LOGIN OVERLAY
+══════════════════════════════════════════════════════════ */
+#login-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(135deg, #0D1F3C 0%, #1B3F8B 50%, #0D1F3C 100%);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.login-geo {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(232,97,10,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 10% 80%, rgba(27,63,139,0.4) 0%, transparent 60%);
+}
+.login-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.login-box {
+  background: white;
+  border-radius: 24px;
+  padding: 48px 44px;
+  width: 100%; max-width: 440px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+  position: relative; z-index: 1;
+  animation: loginPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes loginPop {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.login-logo-row {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 28px; padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.login-logo-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--saffron), #C44A05);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(232,97,10,0.3);
+}
+.login-logo-text { line-height: 1.35; }
+.login-logo-text .firm { font-size: 16px; font-weight: 800; color: var(--navy); letter-spacing: -0.2px; }
+.login-logo-text .sub { font-size: 11px; color: var(--slate); font-weight: 400; }
+.login-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px; color: var(--navy);
+  line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.2px;
+}
+.login-title em { color: var(--saffron); font-style: italic; }
+.login-desc { font-size: 13px; color: var(--slate); font-weight: 300; margin-bottom: 28px; line-height: 1.6; }
+.login-beta {
+  display: inline-block;
+  background: var(--amber-light); color: var(--amber);
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.login-field { margin-bottom: 16px; }
+.login-field label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: var(--slate); letter-spacing: 0.3px; text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.login-field input {
+  width: 100%; padding: 13px 16px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; color: var(--navy);
+  transition: border-color 0.18s, box-shadow 0.18s;
+  background: white;
+}
+.login-field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,63,139,0.1); }
+.login-err {
+  background: #FEF2F2; border: 1px solid #FECACA;
+  color: #991B1B; border-radius: 8px;
+  padding: 10px 14px; font-size: 12.5px; font-weight: 500;
+  margin-bottom: 16px; display: none;
+}
+.login-err.show { display: block; }
+.login-btn {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--saffron), #C44A05);
+  color: white; border: none; border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  letter-spacing: 0.1px;
+  box-shadow: 0 4px 16px rgba(232,97,10,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,10,0.45); }
+.login-footer {
+  text-align: center; margin-top: 20px;
+  font-size: 11.5px; color: #94A3B8; line-height: 1.6;
+}
+.login-footer strong { color: var(--slate); }
+
+/* ══════════════════════════════════════════════════════════
+   MAIN APP (hidden until login)
+══════════════════════════════════════════════════════════ */
+#app { display: none; }
+
+/* ── HEADER ─────────────────────────────────────────────────────── */
+.header { background: var(--navy); position: relative; overflow: hidden; }
+.header-geo {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 85% 50%, rgba(232,97,10,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 400px 300px at 15% 80%, rgba(27,63,139,0.3) 0%, transparent 60%),
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px);
+}
+.header-inner {
+  position: relative; z-index: 1;
+  max-width: 1080px; margin: 0 auto;
+  padding: 36px 36px 32px;
+}
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.header-brand {
+  display: flex; align-items: center; gap: 12px;
+}
+.brand-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--saffron), #C44A05);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.brand-text .firm-name { font-size: 15px; font-weight: 800; color: white; letter-spacing: -0.2px; }
+.brand-text .firm-type { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 300; }
+.header-user-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 7px 14px; border-radius: 20px;
+  cursor: pointer; transition: background 0.15s;
+}
+.header-user-pill:hover { background: rgba(255,255,255,0.14); }
+.header-user-pill span { font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500; }
+.header-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(24px, 4vw, 42px);
+  color: white; line-height: 1.2;
+  margin-bottom: 10px; letter-spacing: -0.3px;
+}
+.header-title em { color: var(--saffron-light); font-style: italic; }
+.header-title-main {
+  font-size: clamp(18px, 2.8vw, 30px);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800; color: white;
+  letter-spacing: -0.3px; margin-bottom: 4px;
+}
+.header-tool-name {
+  background: rgba(232,97,10,0.2);
+  border: 1px solid rgba(232,97,10,0.35);
+  color: var(--saffron-light);
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+  display: inline-block; margin-bottom: 16px;
+}
+.header-sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 13.5px; font-weight: 300;
+  max-width: 640px; line-height: 1.75;
+  margin-bottom: 4px;
+}
+.header-sub em { color: rgba(255,255,255,0.85); font-style: normal; font-weight: 500; }
+.header-beta-note {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(180,83,9,0.2); border: 1px solid rgba(180,83,9,0.35);
+  color: #FCD34D; font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.5px; padding: 4px 12px; border-radius: 20px;
+  margin-top: 10px;
+}
+.header-stats {
+  display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hstat .hstat-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 26px; color: white; display: block; line-height: 1;
+}
+.hstat .hstat-num em { color: var(--saffron-light); font-style: normal; }
+.hstat .hstat-lbl { font-size: 10.5px; color: rgba(255,255,255,0.4); font-weight: 300; margin-top: 3px; }
+.hstat-div { width: 1px; background: rgba(255,255,255,0.1); align-self: stretch; }
+.header-prepared {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: rgba(255,255,255,0.35);
+  font-weight: 300; margin-top: 14px;
+}
+.header-prepared strong { color: rgba(255,255,255,0.65); font-weight: 600; }
+
+/* ── PROGRESS ─────────────────────────────────────────── */
+.progress-wrap {
+  background: white; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(13,31,60,0.06);
+}
+.progress-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 36px;
+  display: flex; align-items: center;
+}
+.progress-step {
+  flex: 1; display: flex; align-items: center;
+  padding: 13px 0; cursor: pointer; position: relative;
+}
+.progress-step::after {
+  content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 60%; background: var(--border);
+}
+.progress-step:last-child::after { display: none; }
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--border); color: var(--slate);
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 9px; flex-shrink: 0; transition: all 0.2s;
+}
+.step-lbl { font-size: 11px; font-weight: 600; color: var(--slate); line-height: 1.3; }
+.progress-step.active .step-num { background: var(--primary); color: white; }
+.progress-step.active .step-lbl { color: var(--primary); }
+.progress-step.done .step-num { background: var(--green); color: white; content: '✓'; }
+.progress-step.done .step-lbl { color: var(--green); }
+
+/* ── MAIN ─────────────────────────────────────────────── */
+.main { max-width: 1080px; margin: 0 auto; padding: 32px 36px 80px; }
+
+/* ── SECTION CARDS ────────────────────────────────────── */
+.section-card { background: white; border-radius: var(--radius); box-shadow: var(--card-shadow); margin-bottom: 18px; overflow: hidden; border: 1px solid var(--border); }
+.section-head { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); cursor: pointer; user-select: none; }
+.section-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.section-title-wrap { flex: 1; }
+.section-title { font-size: 14px; font-weight: 700; color: white; letter-spacing: -0.1px; }
+.section-subtitle { font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 300; margin-top: 2px; }
+.section-chevron { color: rgba(255,255,255,0.7); font-size: 13px; transition: transform 0.25s; }
+.section-card.open .section-chevron { transform: rotate(180deg); }
+.section-body { padding: 24px; display: none; }
+.section-card.open .section-body { display: block; }
+
+/* ── FORM GRID ────────────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 680px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .main { padding: 18px 16px 60px; }
+  .header-inner { padding: 24px 18px 20px; }
+  .progress-inner { padding: 0 14px; }
+  .section-body { padding: 16px; }
+}
+.field-full { grid-column: 1 / -1; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label { font-size: 12px; font-weight: 600; color: var(--slate); display: flex; align-items: center; gap: 6px; }
+.field label .ico { font-size: 13px; }
+.field label .req { font-size: 10px; font-weight: 700; background: var(--saffron-pale); color: var(--saffron); padding: 1px 7px; border-radius: 10px; margin-left: auto; }
+select, input[type="number"], input[type="text"] {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 9px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--navy); background: white;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23475569' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+}
+input[type="number"], input[type="text"] { background-image: none; padding-right: 14px; }
+select:focus, input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,63,139,0.1); }
+.toggle-row { display: flex; border: 1.5px solid var(--border); border-radius: 9px; overflow: hidden; }
+.toggle-row input[type="radio"] { display: none; }
+.toggle-row label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 10px 12px; cursor: pointer; font-size: 12.5px; font-weight: 500; color: var(--slate); background: white; transition: all 0.15s; }
+.toggle-row label:first-of-type { border-right: 1px solid var(--border); }
+.toggle-row input[type="radio"].yes-opt:checked + label { background: var(--green); color: white; font-weight: 600; }
+.toggle-row input[type="radio"].no-opt:checked + label { background: #F1F5F9; color: var(--slate); font-weight: 600; }
+.field-hint { font-size: 11px; color: #94A3B8; font-style: italic; margin-top: -3px; }
+.sub-field { background: var(--primary-pale); border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-top: 4px; display: none; }
+.sub-field.show { display: block; }
+.sub-field label { color: var(--primary); font-weight: 600; }
+.form-divider { display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; }
+.form-divider-line { flex: 1; height: 1px; background: var(--border); }
+.form-divider-text { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #94A3B8; }
+
+/* ── CTA ──────────────────────────────────────────────── */
+.cta-row { display: flex; align-items: center; gap: 14px; margin-top: 26px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--border); }
+.btn-primary { background: linear-gradient(135deg, var(--saffron), #C44A05); color: white; border: none; padding: 14px 32px; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(232,97,10,0.35); transition: transform 0.15s, box-shadow 0.15s; display: flex; align-items: center; gap: 8px; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,10,0.45); }
+.btn-secondary { background: transparent; border: 1.5px solid var(--border); color: var(--slate); padding: 13px 20px; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn-secondary:hover { border-color: var(--navy); color: var(--navy); }
+.error-toast { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; font-size: 13px; font-weight: 500; display: none; align-items: center; gap: 8px; }
+.error-toast.show { display: flex; }
+
+/* ── RESULTS ──────────────────────────────────────────── */
+#results-section { display: none; animation: revealUp 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes revealUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+.results-banner { background: linear-gradient(135deg, var(--navy), #1A3360); border-radius: var(--radius); padding: 26px 30px; margin-bottom: 22px; position: relative; overflow: hidden; }
+.results-banner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(232,97,10,0.2) 0%, transparent 70%); border-radius: 50%; }
+.results-banner-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.results-title { font-family: 'Instrument Serif', serif; font-size: 22px; color: white; letter-spacing: -0.2px; }
+.results-date { font-size: 11.5px; color: rgba(255,255,255,0.4); font-weight: 300; }
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+@media (max-width: 640px) { .results-grid { grid-template-columns: repeat(2,1fr); } }
+.rg-cell { background: rgba(255,255,255,0.05); padding: 14px; text-align: center; }
+.rg-num { font-family: 'Instrument Serif', serif; font-size: 30px; display: block; line-height: 1; }
+.rg-num.orange { color: var(--saffron-light); }
+.rg-num.blue { color: #93C5FD; }
+.rg-num.green { color: #6EE7B7; }
+.rg-num.white { color: white; }
+.rg-lbl { font-size: 10.5px; color: rgba(255,255,255,0.45); font-weight: 300; margin-top: 3px; display: block; }
+.results-prepared { text-align: right; font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 14px; font-style: italic; }
+.results-prepared strong { color: rgba(255,255,255,0.6); }
+.results-category { margin-bottom: 26px; }
+.cat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+.cat-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
+.cat-badge.central { background: #EEF2FB; color: var(--primary); border: 1px solid #C7D5F5; }
+.cat-badge.state { background: #FEF3EB; color: var(--saffron); border: 1px solid #F5CCB0; }
+.cat-count { font-size: 12px; color: var(--slate); font-weight: 400; }
+.license-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 640px) { .license-cards { grid-template-columns: 1fr; } }
+.lcard { background: white; border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.18s, box-shadow 0.18s; box-shadow: var(--card-shadow); }
+.lcard:hover { transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
+.lcard-top { display: flex; align-items: flex-start; gap: 11px; padding: 15px 16px 13px; }
+.lcard-icon { width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.lcard-icon.required { background: #FEF3EB; }
+.lcard-icon.recommended { background: var(--primary-pale); }
+.lcard-icon.not-required { background: var(--green-light); }
+.lcard-icon.info { background: var(--amber-light); }
+.lcard-meta { flex: 1; min-width: 0; }
+.lcard-name { font-size: 13.5px; font-weight: 700; color: var(--navy); letter-spacing: -0.1px; }
+.lcard-dept { font-size: 10.5px; color: var(--slate); font-weight: 300; margin-top: 2px; line-height: 1.4; }
+.lcard-badge { padding: 3px 9px; border-radius: 12px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; flex-shrink: 0; white-space: nowrap; }
+.badge-required { background: #FFF0EB; color: #B94000; }
+.badge-recommended { background: var(--primary-pale); color: var(--primary); }
+.badge-not-required { background: var(--green-light); color: var(--green); }
+.badge-conditional { background: var(--amber-light); color: var(--amber); }
+.lcard-body { padding: 0 16px 15px; border-top: 1px solid var(--border); padding-top: 13px; }
+.lcard-reason { font-size: 12px; color: var(--slate); line-height: 1.65; margin-bottom: 10px; }
+.lcard-reason strong { color: var(--navy); }
+.trigger-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.ttag { padding: 2px 8px; border-radius: 5px; font-size: 10px; font-weight: 600; }
+.ttag.req { background: #FEF3EB; color: #B94000; }
+.ttag.rec { background: #EEF2FB; color: #2546A4; }
+.ttag.ok { background: var(--green-light); color: var(--green); }
+.ttag.warn { background: var(--amber-light); color: var(--amber); }
+.lcard-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: var(--saffron); text-decoration: none; transition: gap 0.15s; }
+.lcard-link:hover { gap: 7px; }
+.sub-approvals { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.sub-item { background: #F8FAFC; border-left: 3px solid var(--border); border-radius: 0 6px 6px 0; padding: 7px 11px; font-size: 11.5px; color: var(--slate); line-height: 1.5; }
+.sub-item strong { color: var(--navy); display: block; font-size: 11.5px; margin-bottom: 1px; }
+.msme-tier-banner { background: linear-gradient(135deg,#0D1F3C,#1B3F8B); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.05); }
+.msme-tier-icon { font-size: 26px; }
+.msme-tier-text .tier-label { font-size: 10.5px; color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 3px; }
+.msme-tier-text .tier-val { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--saffron-light); }
+.msme-tier-text .tier-detail { font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 300; margin-top: 3px; }
+.disclaimer { margin-top: 26px; background: #FFFBF0; border: 1px solid #FDE68A; border-radius: 12px; padding: 14px 18px; display: flex; gap: 10px; align-items: flex-start; font-size: 11.5px; color: #92400E; line-height: 1.65; }
+.disclaimer-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+.footer-bar { background: var(--navy); padding: 20px 36px; text-align: center; }
+.footer-bar-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-firm { font-size: 13px; font-weight: 700; color: white; }
+.footer-note { font-size: 11px; color: rgba(255,255,255,0.4); }
+.footer-beta { background: rgba(232,97,10,0.2); border: 1px solid rgba(232,97,10,0.3); color: var(--saffron-light); font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOGIN OVERLAY
+══════════════════════════════════════════════════════════ -->
+<div id="login-overlay">
+  <div class="login-geo"></div>
+  <div class="login-dots"></div>
+  <div class="login-box">
+    <div class="login-logo-row">
+      <div class="login-logo-icon">⚖️</div>
+      <div class="login-logo-text">
+        <div class="firm">DGNM & Associates LLP</div>
+        <div class="sub">Chartered Accountants</div>
+      </div>
+    </div>
+    <div class="login-beta">🔒 Beta Access Required</div>
+    <div class="login-title">Gujarat Business<br><em>License Checker</em></div>
+    <p class="login-desc">Enter your access credentials to use the Gujarat Business Approval & License Eligibility Checker. Contact DGNM & Associates LLP to receive your credentials.</p>
+    <div class="login-err" id="login-err">⚠️ Invalid username or password. Please try again.</div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="Enter username" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">🔓 Access Tool</button>
+    <div class="login-footer">
+      <strong>Don't have credentials?</strong><br>
+      Contact DGNM & Associates LLP to request beta access.<br>
+      <span style="color:#CBD5E1;font-size:10.5px;">&copy; 2026 DGNM &amp; Associates LLP. Beta Version.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════════════════════════ -->
+<div id="app">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-geo"></div>
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="brand-icon">⚖️</div>
+        <div class="brand-text">
+          <div class="firm-name">DGNM & Associates LLP</div>
+          <div class="firm-type">Chartered Accountants</div>
+        </div>
+      </div>
+      <div class="header-user-pill" onclick="doLogout()">
+        <span>👤</span><span id="user-label">dgnm</span><span style="font-size:10px;color:rgba(255,255,255,0.5)">▼ Logout</span>
+      </div>
+    </div>
+    <div class="header-tool-name">Gujarat Business License Eligibility Checker</div>
+    <div class="header-title">Gujarat Business Approval &amp;<br><em>License Eligibility Checker</em></div>
+    <p class="header-sub">
+      A <em>Beta Version</em> of a Comprehensive Tool for <em>Gujarat Business Owners</em> from <em>Retail Shops to Large-Scale Manufacturers</em> to instantly determine all <em>Central and State Government Registrations</em> required under current law.
+    </p>
+    <div class="header-beta-note">⚠️ Beta Version — For Guidance Purposes Only</div>
+    <div class="header-stats">
+      <div class="hstat"><span class="hstat-num"><em>11</em></span><div class="hstat-lbl">Approvals Evaluated</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-num"><em>4</em></span><div class="hstat-lbl">Central Licenses</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-num"><em>7</em></span><div class="hstat-lbl">Gujarat State Approvals</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-num"><em>15+</em></span><div class="hstat-lbl">Input Parameters</div></div>
+    </div>
+    <div class="header-prepared">
+      <span>🏛️ Prepared by</span>
+      <strong>DGNM &amp; Associates LLP</strong>
+      <span>Chartered Accountants</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-step active" id="ps1"><div class="step-num">1</div><div class="step-lbl">Financial &<br>Business Type</div></div>
+    <div class="progress-step" id="ps2"><div class="step-num">2</div><div class="step-lbl">Geography &<br>Trade</div></div>
+    <div class="progress-step" id="ps3"><div class="step-num">3</div><div class="step-lbl">Employees &<br>Premises</div></div>
+    <div class="progress-step" id="ps4"><div class="step-num">4</div><div class="step-lbl">Technical &<br>Environment</div></div>
+  </div>
+</div>
+
+<!-- MAIN FORM -->
+<div class="main">
+  <div class="error-toast" id="err-toast"><span>⚠️</span><span id="err-msg">Please fill all required fields.</span></div>
+
+  <!-- SECTION 1 -->
+  <div class="section-card open" id="sec1">
+    <div class="section-head" onclick="toggleSection('sec1')">
+      <div class="section-icon">💰</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Section 1 — Financial Details & Business Type</div>
+        <div class="section-subtitle">Annual turnover, investment in plant & machinery, nature of business</div>
+      </div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="field">
+          <label><span class="ico">📊</span> Annual Turnover <span class="req">Required</span></label>
+          <select id="turnover" onchange="updateProgress()">
+            <option value="">— Select Turnover Range —</option>
+            <option value="below20">Below ₹20 Lakhs</option>
+            <option value="20to40">₹20 Lakhs – ₹40 Lakhs</option>
+            <option value="40to75">₹40 Lakhs – ₹75 Lakhs</option>
+            <option value="75Lto5C">₹75 Lakhs – ₹5 Crores</option>
+            <option value="5Cto50C">₹5 Crores – ₹50 Crores</option>
+            <option value="50Cto250C">₹50 Crores – ₹250 Crores</option>
+            <option value="above250C">Above ₹250 Crores</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span class="ico">🏭</span> Investment in Plant & Machinery / Equipment <span class="req">Required</span></label>
+          <select id="investment" onchange="updateProgress()">
+            <option value="">— Select Investment Range —</option>
+            <option value="below2.5C">Below ₹2.5 Crores</option>
+            <option value="2.5Cto25C">₹2.5 Crores to ₹25 Crores</option>
+            <option value="25Cto125C">₹25 Crores to ₹125 Crores</option>
+            <option value="above125C">Above ₹125 Crores</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label><span class="ico">⚙️</span> Nature of Primary Business Activity <span class="req">Required</span></label>
+          <select id="biztype" onchange="updateProgress()">
+            <option value="">— Select Business Type —</option>
+            <option value="manufacturing">Manufacturing (production of goods)</option>
+            <option value="services">Services (IT, consulting, education, hospitality, etc.)</option>
+            <option value="trading">Trading / Retail / Wholesale</option>
+            <option value="mixed">Mixed (Manufacturing + Services)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-card" id="sec2">
+    <div class="section-head" onclick="toggleSection('sec2')">
+      <div class="section-icon">🌐</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Section 2 — Sales Geography, Trade & Product Type</div>
+        <div class="section-subtitle">Market reach, import/export, food, e-commerce, packaged goods</div>
+      </div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="field">
+          <label><span class="ico">🗺️</span> Sales Geography <span class="req">Required</span></label>
+          <select id="geography" onchange="updateProgress()">
+            <option value="">— Select Geography —</option>
+            <option value="intrastate">Intra-State Gujarat Only</option>
+            <option value="interstate">Inter-State (Across States)</option>
+            <option value="both">Both Intra & Inter-State</option>
+          </select>
+        </div>
+        <div class="field">
+          <label><span class="ico">🌍</span> Import / Export Activity</label>
+          <div class="toggle-row">
+            <input type="radio" name="iec" id="iec_no" value="no" class="no-opt" checked>
+            <label for="iec_no">❌ No</label>
+            <input type="radio" name="iec" id="iec_yes" value="yes" class="yes-opt">
+            <label for="iec_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">🍽️</span> Food / Beverage Handling, Processing or Selling</label>
+          <div class="toggle-row">
+            <input type="radio" name="fssai" id="fssai_no" value="no" class="no-opt" checked>
+            <label for="fssai_no">❌ No</label>
+            <input type="radio" name="fssai" id="fssai_yes" value="yes" class="yes-opt">
+            <label for="fssai_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">🛒</span> E-Commerce Operator / Seller (Amazon, Flipkart, own website etc.)</label>
+          <div class="toggle-row">
+            <input type="radio" name="ecomm" id="ecomm_no" value="no" class="no-opt" checked>
+            <label for="ecomm_no">❌ No</label>
+            <input type="radio" name="ecomm" id="ecomm_yes" value="yes" class="yes-opt">
+            <label for="ecomm_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">📦</span> Do you manufacture or pack pre-packaged commodities for retail sale?</label>
+          <div class="toggle-row">
+            <input type="radio" name="pcr" id="pcr_no" value="no" class="no-opt" checked>
+            <label for="pcr_no">❌ No</label>
+            <input type="radio" name="pcr" id="pcr_yes" value="yes" class="yes-opt">
+            <label for="pcr_yes">✅ Yes</label>
+          </div>
+          <div class="field-hint">FMCG, packaged food, consumer goods, etc.</div>
+        </div>
+        <div class="field">
+          <label><span class="ico">⚖️</span> Do you manufacture, repair, or sell weighing / measuring instruments?</label>
+          <div class="toggle-row">
+            <input type="radio" name="weights" id="weights_no" value="no" class="no-opt" checked>
+            <label for="weights_no">❌ No</label>
+            <input type="radio" name="weights" id="weights_yes" value="yes" class="yes-opt">
+            <label for="weights_yes">✅ Yes</label>
+          </div>
+          <div class="field-hint">Weighing scales, fuel dispensers, measuring instruments, etc.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-card" id="sec3">
+    <div class="section-head" onclick="toggleSection('sec3')">
+      <div class="section-icon">👥</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Section 3 — Employees, Labour & Premises</div>
+        <div class="section-subtitle">Workforce size, premises location, fire risk</div>
+      </div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="field">
+          <label><span class="ico">👷</span> Do you have / will you have paid employees?</label>
+          <div class="toggle-row">
+            <input type="radio" name="hasemps" id="hasemps_no" value="no" class="no-opt" checked onchange="toggleEmpCount()">
+            <label for="hasemps_no">❌ No</label>
+            <input type="radio" name="hasemps" id="hasemps_yes" value="yes" class="yes-opt" onchange="toggleEmpCount()">
+            <label for="hasemps_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="sub-field" id="emp-count-field">
+            <label><span class="ico">🔢</span> Total number of employees</label>
+            <input type="number" id="empcount" placeholder="e.g. 15" min="1">
+            <div class="field-hint">Factory License needed if manufacturing + >10 employees with power.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">🏙️</span> Is the commercial premise within Municipal Corporation / Municipality limits?</label>
+          <div class="toggle-row">
+            <input type="radio" name="municipal" id="muni_no" value="no" class="no-opt" checked>
+            <label for="muni_no">❌ No / Rural Panchayat</label>
+            <input type="radio" name="municipal" id="muni_yes" value="yes" class="yes-opt">
+            <label for="muni_yes">✅ Yes</label>
+          </div>
+          <div class="field-hint">AMC, SMC, VMC, RAJKOT MC, etc.</div>
+        </div>
+        <div class="field">
+          <label><span class="ico">🔥</span> High-rise building, commercial complex, mall, hotel, hospital or hazardous materials on premises?</label>
+          <div class="toggle-row">
+            <input type="radio" name="fire" id="fire_no" value="no" class="no-opt" checked>
+            <label for="fire_no">❌ No</label>
+            <input type="radio" name="fire" id="fire_yes" value="yes" class="yes-opt">
+            <label for="fire_yes">✅ Yes</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-card" id="sec4">
+    <div class="section-head" onclick="toggleSection('sec4')">
+      <div class="section-icon">⚡</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Section 4 — Technical Infrastructure & Environment</div>
+        <div class="section-subtitle">DG sets, HV electricity, GPCB environmental consents</div>
+      </div>
+      <div class="section-chevron">▼</div>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="field field-full">
+          <label><span class="ico">🏗️</span> Will your facility generate industrial wastewater, air emissions, noise, solid/hazardous waste, or e-waste?</label>
+          <div class="toggle-row">
+            <input type="radio" name="gpcb" id="gpcb_no" value="no" class="no-opt" checked onchange="toggleGpcbSub()">
+            <label for="gpcb_no">❌ No</label>
+            <input type="radio" name="gpcb" id="gpcb_yes" value="yes" class="yes-opt" onchange="toggleGpcbSub()">
+            <label for="gpcb_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field field-full">
+          <div class="sub-field" id="gpcb-sub">
+            <label><span class="ico">☣️</span> Does the waste include E-waste (electronic equipment) or Hazardous / Chemical Waste specifically?</label>
+            <div class="toggle-row" style="margin-top:8px">
+              <input type="radio" name="hazwaste" id="haz_no" value="no" class="no-opt" checked>
+              <label for="haz_no">No / General Industrial Waste Only</label>
+              <input type="radio" name="hazwaste" id="haz_yes" value="yes" class="yes-opt">
+              <label for="haz_yes">Yes — E-waste / Hazardous Waste</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">⚡</span> Will you install a Diesel Generator (DG) set at your premises?</label>
+          <div class="toggle-row">
+            <input type="radio" name="dg" id="dg_no" value="no" class="no-opt" checked>
+            <label for="dg_no">❌ No</label>
+            <input type="radio" name="dg" id="dg_yes" value="yes" class="yes-opt">
+            <label for="dg_yes">✅ Yes</label>
+          </div>
+        </div>
+        <div class="field">
+          <label><span class="ico">🔌</span> Will you require a High Tension (HT) or High Voltage (HV/EHV) electrical connection?</label>
+          <div class="toggle-row">
+            <input type="radio" name="hv" id="hv_no" value="no" class="no-opt" checked>
+            <label for="hv_no">❌ No</label>
+            <input type="radio" name="hv" id="hv_yes" value="yes" class="yes-opt">
+            <label for="hv_yes">✅ Yes</label>
+          </div>
+          <div class="field-hint">HT connections typically >100 kVA load (33kV/11kV supply)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <button class="btn-primary" onclick="checkEligibility()"><span>⚡</span> Check My Gujarat Eligibility</button>
+    <button class="btn-secondary" onclick="resetAll()">↺ Reset All</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results-section">
+    <div class="results-banner">
+      <div class="results-banner-top">
+        <div class="results-title">📊 Your Compliance Report — Gujarat</div>
+        <div class="results-date" id="rdate"></div>
+      </div>
+      <div class="results-grid">
+        <div class="rg-cell"><span class="rg-num orange" id="r-mandatory">—</span><span class="rg-lbl">Mandatory / Required</span></div>
+        <div class="rg-cell"><span class="rg-num blue" id="r-recommended">—</span><span class="rg-lbl">Recommended</span></div>
+        <div class="rg-cell"><span class="rg-num green" id="r-notreq">—</span><span class="rg-lbl">Not Applicable</span></div>
+        <div class="rg-cell"><span class="rg-num white" id="r-total">—</span><span class="rg-lbl">Total Evaluated</span></div>
+      </div>
+      <div class="results-prepared">Prepared by <strong>DGNM &amp; Associates LLP</strong>, Chartered Accountants &nbsp;|&nbsp; Beta Version &nbsp;|&nbsp; &copy; 2026</div>
+    </div>
+    <div id="msme-tier-div"></div>
+    <div class="results-category">
+      <div class="cat-header">
+        <span class="cat-badge central">🏛️ Central Government Approvals</span>
+        <span class="cat-count" id="central-count"></span>
+      </div>
+      <div class="license-cards" id="central-cards"></div>
+    </div>
+    <div class="results-category">
+      <div class="cat-header">
+        <span class="cat-badge state">🏛️ Gujarat State Government Approvals</span>
+        <span class="cat-count" id="state-count"></span>
+      </div>
+      <div class="license-cards" id="state-cards"></div>
+    </div>
+    <div class="disclaimer">
+      <span class="disclaimer-icon">⚠️</span>
+      <span><strong>Disclaimer (Beta Version):</strong> This tool is prepared by <strong>DGNM &amp; Associates LLP, Chartered Accountants</strong> and provides general guidance based on current Indian and Gujarat State law thresholds. Laws and thresholds are subject to change by government notifications. Actual eligibility may depend on specific industry type, GPCB pollution category, DISH schedules, exact location, and other parameters not captured here. This tool does <em>not</em> constitute legal or professional advice. Always consult a qualified Chartered Accountant, Company Secretary, or legal advisor before making compliance decisions.</span>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  <div class="footer-bar-inner">
+    <div class="footer-firm">⚖️ DGNM & Associates LLP</div>
+    <div class="footer-note">Gujarat Business License Eligibility Checker &copy; 2026 DGNM &amp; Associates LLP</div>
+    <div class="footer-beta">BETA VERSION</div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+const CREDS = { username: 'dgnm', password: 'betaversion' };
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim().toLowerCase();
+  const p = document.getElementById('login-pass').value.trim();
+  const err = document.getElementById('login-err');
+  if (u === CREDS.username && p === CREDS.password) {
+    err.classList.remove('show');
+    document.getElementById('login-overlay').style.animation = 'fadeOut 0.4s ease forwards';
+    setTimeout(() => {
+      document.getElementById('login-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('user-label').textContent = u;
+    }, 380);
+  } else {
+    err.classList.add('show');
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+  }
+}
+
+function doLogout() {
+  if (confirm('Log out of Gujarat License Checker?')) {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-overlay').style.cssText = 'display:flex;animation:loginPop 0.4s ease';
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+  }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const radio = name => document.querySelector(`input[name="${name}"]:checked`)?.value;
+const TURNOVER_LAKHS = { 'below20':10,'20to40':30,'40to75':57,'75Lto5C':200,'5Cto50C':2500,'50Cto250C':15000,'above250C':300000 };
+const INVEST_LAKHS   = { 'below2.5C':100,'2.5Cto25C':1000,'25Cto125C':5000,'above125C':100000 };
+
+// MSME Revised Classification w.e.f. 1st April 2025 (Composite Criteria)
+// Micro  : Investment <= Rs. 2.5 Crore  AND Turnover <= Rs. 10 Crore
+// Small  : Investment <= Rs. 25 Crore   AND Turnover <= Rs. 100 Crore
+// Medium : Investment <= Rs. 125 Crore  AND Turnover <= Rs. 500 Crore
+function getMSME(bizType, invKey, turnKey) {
+  const t = TURNOVER_LAKHS[turnKey]??0, i = INVEST_LAKHS[invKey]??0;
+  if (i<=250  && t<=1000)  return 'Micro';
+  if (i<=2500 && t<=10000) return 'Small';
+  if (i<=12500&& t<=50000) return 'Medium';
+  return null;
+}
+
+function toggleSection(id) { $(id).classList.toggle('open'); }
+function toggleEmpCount() {
+  const yes = radio('hasemps')==='yes';
+  $('emp-count-field').classList.toggle('show', yes);
+  if (!yes) $('empcount').value = '';
+}
+function toggleGpcbSub() { $('gpcb-sub').classList.toggle('show', radio('gpcb')==='yes'); }
+function updateProgress() {
+  const t=$('turnover').value, g=$('geography').value;
+  if (t) { $('ps1').classList.add('done'); $('ps1').classList.remove('active'); $('ps2').classList.add('active'); }
+  if (g) { $('ps2').classList.add('done'); $('ps2').classList.remove('active'); $('ps3').classList.add('active'); }
+}
+
+// ── CARD BUILDER ──────────────────────────────────────────────────────────────
+function buildCard({icon,name,dept,status,reason,tags,link,subItems}) {
+  const bm={'required':'badge-required','recommended':'badge-recommended','not-required':'badge-not-required','conditional':'badge-conditional'};
+  const bl={'required':'● Mandatory','recommended':'● Recommended','not-required':'● Not Required','conditional':'● Conditional'};
+  const ib={'required':'required','recommended':'recommended','not-required':'not-required','conditional':'info'};
+  const tc={'required':'req','recommended':'rec','not-required':'ok','conditional':'warn'};
+  const tagsH=(tags||[]).map(t=>`<span class="ttag ${tc[status]}">${t}</span>`).join('');
+  const subH=subItems?`<div class="sub-approvals">${subItems.map(s=>`<div class="sub-item"><strong>${s.title}</strong>${s.desc}</div>`).join('')}</div>`:'';
+  return `<div class="lcard">
+    <div class="lcard-top">
+      <div class="lcard-icon ${ib[status]}">${icon}</div>
+      <div class="lcard-meta"><div class="lcard-name">${name}</div><div class="lcard-dept">${dept}</div></div>
+      <span class="lcard-badge ${bm[status]}">${bl[status]}</span>
+    </div>
+    <div class="lcard-body">
+      <p class="lcard-reason">${reason}</p>
+      <div class="trigger-tags">${tagsH}</div>${subH}
+      ${link?`<a class="lcard-link" href="${link}" target="_blank" rel="noopener">Apply / More Info →</a>`:''}
+    </div>
+  </div>`;
+}
+
+// ── MAIN LOGIC ────────────────────────────────────────────────────────────────
+function checkEligibility() {
+  const turnKey=$('turnover').value, invKey=$('investment').value, biz=$('biztype').value, geo=$('geography').value;
+  if (!turnKey||!invKey||!biz||!geo) {
+    const err=$('err-toast'); err.classList.add('show');
+    err.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>err.classList.remove('show'),4000); return;
+  }
+  $('err-toast').classList.remove('show');
+  const turn=TURNOVER_LAKHS[turnKey], inv=INVEST_LAKHS[invKey];
+  const iec=radio('iec'), fssai=radio('fssai'), ecomm=radio('ecomm'), pcr=radio('pcr'), weights=radio('weights');
+  const hasemps=radio('hasemps'), empcount=parseInt($('empcount').value)||0;
+  const muni=radio('municipal'), fire=radio('fire'), gpcb=radio('gpcb'), haz=radio('hazwaste'), dg=radio('dg'), hv=radio('hv');
+  const msme=getMSME(biz,invKey,turnKey);
+  const central=[], state=[];
+
+  // 1. MSME
+  if (msme) {
+    central.push(buildCard({icon:'🏢',name:'Udyam Registration (MSME)',dept:'Ministry of MSME, Government of India',status:'recommended',
+      reason:`Your business qualifies as a <strong>${msme} Enterprise</strong> under the MSME revised classification applicable w.e.f. 1st April 2025. Under the composite criteria, a <strong>${msme} Enterprise</strong> is defined as: Investment in Plant and Machinery or Equipment not more than <strong>${msme==='Micro'?'₹2.5 Crore':msme==='Small'?'₹25 Crore':'₹125 Crore'}</strong> and Annual Turnover not more than <strong>${msme==='Micro'?'₹10 Crore':msme==='Small'?'₹100 Crore':'₹500 Crore'}</strong>. Udyam Registration unlocks <strong>priority sector lending, CGTMSE collateral-free loans, Delayed Payment Protection under MSMED Act</strong> and Gujarat state MSME scheme benefits.`,
+      tags:[`${msme} Enterprise`,'Voluntary but Highly Beneficial','Revised w.e.f. 1st April 2025'],link:'https://udyamregistration.gov.in/'}));
+  } else {
+    central.push(buildCard({icon:'🏢',name:'Udyam Registration (MSME)',dept:'Ministry of MSME, Government of India',status:'not-required',
+      reason:`Your investment and/or turnover exceeds the <strong>Medium Enterprise thresholds</strong> as revised w.e.f. 1st April 2025 (Investment more than ₹125 Crore or Annual Turnover more than ₹500 Crore). Your business is not eligible for MSME/Udyam Registration under the current classification.`,
+      tags:['Exceeds MSME Limits','Not Eligible','Revised April 2025'],link:'https://udyamregistration.gov.in/'}));
+  }
+
+  // 2. GST
+  const gstT=[];
+  if (ecomm==='yes') gstT.push('E-commerce seller/operator (no turnover exemption)');
+  if (geo==='interstate'||geo==='both') gstT.push('Inter-state supply of goods/services');
+  if ((biz==='services'||biz==='mixed')&&turn>=20) gstT.push('Service turnover ≥ ₹20 Lakhs');
+  if ((biz==='manufacturing'||biz==='trading')&&turn>=40) gstT.push('Goods turnover ≥ ₹40 Lakhs');
+  if (gstT.length>0) {
+    central.push(buildCard({icon:'🧾',name:'GST Registration',dept:'GST Council / CBIC, Gujarat State Tax Department',status:'required',
+      reason:`GST Registration is <strong>mandatory</strong> for your business. Applicable triggers: <strong>${gstT.join('; ')}</strong>. Non-registration carries a penalty of 10% of tax due (minimum ₹10,000) under CGST Act 2017.`,
+      tags:['CGST Act 2017','Mandatory',...gstT.slice(0,2)],link:'https://www.gst.gov.in/'}));
+  } else {
+    central.push(buildCard({icon:'🧾',name:'GST Registration',dept:'GST Council / CBIC, Gujarat State Tax Department',status:'recommended',
+      reason:`GST Registration is <strong>not mandatory</strong> at your current scale (below threshold, intra-state only). <strong>Voluntary registration is advisable</strong> for B2B transactions to enable Input Tax Credit and to position for future growth.`,
+      tags:['Below Threshold','Intra-state Only','Voluntary Available'],link:'https://www.gst.gov.in/'}));
+  }
+
+  // 3. IEC
+  if (iec==='yes') {
+    central.push(buildCard({icon:'🌏',name:'Import Export Code (IEC)',dept:'Directorate General of Foreign Trade (DGFT), Ministry of Commerce',status:'required',
+      reason:`Import and Export activity confirmed. IEC is <strong>mandatory</strong> under the Foreign Trade (Development and Regulation) Act, 1992. No consignment can be legally imported into or exported from India without a valid IEC. It is a one-time registration issued by DGFT with no annual renewal requirement.`,
+      tags:['Import/Export Confirmed','FT(D&R) Act 1992','One-time Registration'],link:'https://www.dgft.gov.in/'}));
+  } else {
+    central.push(buildCard({icon:'🌏',name:'Import Export Code (IEC)',dept:'Directorate General of Foreign Trade (DGFT), Ministry of Commerce',status:'not-required',
+      reason:`No import or export activity indicated. IEC is <strong>not currently applicable</strong> to your business. You must obtain an IEC before commencing any cross-border trade in goods or services in the future.`,
+      tags:['No Cross-border Trade','Not Applicable'],link:'https://www.dgft.gov.in/'}));
+  }
+
+  // 4. FSSAI
+  if (fssai==='yes') {
+    const ft=turn<12?'FSSAI Basic Registration':turn<2000?'FSSAI State License':'FSSAI Central License';
+    const fd=turn<12?'Turnover below ₹12 Lakhs: Form A to be submitted to the local Food Safety Officer.':turn<2000?'Turnover between ₹12 Lakhs and ₹20 Crores: Form B to be submitted to the Gujarat State Food Safety Commissioner.':'Turnover above ₹20 Crores or multi-state operations: Application to the Central Licensing Authority.';
+    central.push(buildCard({icon:'🍃',name:'FSSAI License / Registration',dept:'Food Safety and Standards Authority of India (MoHFW)',status:'required',
+      reason:`Food and beverage activity confirmed. FSSAI registration is <strong>mandatory</strong> under the Food Safety and Standards Act, 2006 for all Food Business Operators (FBOs). Based on your annual turnover, the applicable license is: <strong>${ft}</strong>. ${fd}`,
+      tags:['Food/Beverage Confirmed','FSS Act 2006',ft,'Mandatory FBO'],link:'https://foscos.fssai.gov.in/'}));
+  } else {
+    central.push(buildCard({icon:'🍃',name:'FSSAI License / Registration',dept:'Food Safety and Standards Authority of India (MoHFW)',status:'not-required',
+      reason:`No food or beverage handling, processing, or selling activity indicated. FSSAI registration is <strong>not applicable</strong> to your current business. If your business activity changes to include any food-related operation in the future, FSSAI registration becomes mandatory before commencement.`,
+      tags:['No Food Activity','Not Applicable'],link:'https://foscos.fssai.gov.in/'}));
+  }
+
+  // 5. Professional Tax
+  if (hasemps==='yes'&&empcount>=1) {
+    state.push(buildCard({icon:'💼',name:'Professional Tax — Employer Registration',dept:'Gujarat State Tax and Commercial Tax Department',status:'required',
+      reason:`You have <strong>${empcount} paid employee(s)</strong>. Under the Gujarat Panchayats, Municipal Corporations and State Tax on Professions, Trades, Callings and Employments Act, 1976, <strong>every employer must register</strong> and deduct Professional Tax from employee salaries. Monthly and annual returns are required. Maximum liability is ₹2,500 per year per employee.`,
+      tags:[`${empcount} Employees Declared`,'Employer Deduction Obligatory','Gujarat PT Act 1976'],link:'https://gst.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'💼',name:'Professional Tax — Employer Registration',dept:'Gujarat State Tax and Commercial Tax Department',status:'not-required',
+      reason:`No paid employees indicated. Employer Professional Tax Registration is <strong>not applicable</strong> at this stage. Note: sole proprietors and partners may still have personal PT liability of up to ₹2,500 per year on their own profession or trade income.`,
+      tags:['No Paid Employees','Personal PT May Apply'],link:'https://gst.gujarat.gov.in/'}));
+  }
+
+  // 6. Shop & Establishment
+  if (muni==='yes') {
+    state.push(buildCard({icon:'🏪',name:'Shop and Establishment Registration (Gumasta Dhara)',dept:'Local Municipal Corporation and Gujarat Labour and Employment Department',status:'required',
+      reason:`Your premises are within <strong>municipal corporation or municipality limits</strong>. Registration under the <strong>Bombay Shops and Establishments Act, 1948</strong> (applicable in Gujarat) is mandatory for all commercial establishments within municipal areas including shops, offices, service units, and factories below the Factory Act threshold. Registration must be obtained within 30 days of commencement of business. It also serves as a key KYC document for banks and other registrations.`,
+      tags:['Within Municipal Limits','Bombay Shops Act 1948','Within 30 Days','Key KYC Document'],link:'https://labour.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'🏪',name:'Shop and Establishment Registration (Gumasta Dhara)',dept:'Local Municipal Corporation and Gujarat Labour and Employment Department',status:'not-required',
+      reason:`Your premises are in a <strong>rural area or gram panchayat</strong> and outside municipal limits. Shop and Establishment registration under the Bombay Shops Act is <strong>not mandatory</strong> for rural or panchayat-area businesses. However, if you open a branch in a municipal area, registration will be required for that specific premises.`,
+      tags:['Outside Municipal Limits','Rural / Panchayat Area','Not Required'],link:'https://labour.gujarat.gov.in/'}));
+  }
+
+  // 7. Legal Metrology
+  const lmT=[];
+  if (pcr==='yes') lmT.push({title:'Certificate of Registration under Packaged Commodity Rules (PCR)',desc:' Mandatory for manufacturers and packers of pre-packaged commodities under Legal Metrology (Packaged Commodities) Rules, 2011. Required before packing or selling any packaged product.'});
+  if (weights==='yes') lmT.push({title:'License for Dealer / Manufacturer / Repairer of Weights and Measures',desc:' Mandatory license under Legal Metrology Act, 2009 and Gujarat Legal Metrology (Enforcement) Rules for any person manufacturing, repairing, or dealing in weighing or measuring instruments.'});
+  if (lmT.length>0) {
+    state.push(buildCard({icon:'⚖️',name:'Legal Metrology and Packaged Commodity Approvals',dept:'Department of Food, Civil Supplies and Consumer Affairs, Gujarat (DCSCA)',status:'required',
+      reason:`Based on your inputs, the following Legal Metrology approvals under the <strong>Legal Metrology Act, 2009</strong> are mandatory for your business:`,
+      tags:[...(pcr==='yes'?['PCR Registration Required']:[]),...(weights==='yes'?['W&M Dealer/Mfr License Required']:[]),'Legal Metrology Act 2009'],
+      subItems:lmT,link:'https://dcs.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'⚖️',name:'Legal Metrology and Packaged Commodity Approvals',dept:'Department of Food, Civil Supplies and Consumer Affairs, Gujarat (DCSCA)',status:'not-required',
+      reason:`You do not manufacture pre-packaged commodities or deal in weighing and measuring instruments. Legal Metrology approvals including PCR Registration and the Weights and Measures Dealer/Manufacturer License are <strong>not applicable</strong> to your current business.`,
+      tags:['No Packaged Goods','No Weights/Measures Trade','Not Applicable'],link:'https://dcs.gujarat.gov.in/'}));
+  }
+
+  // 8. Electrical & DG
+  const elT=[];
+  if (dg==='yes') elT.push({title:'Approval for DG Set Installation',desc:' Required from the Electrical Inspector, Energy and Petrochemicals Department, Gujarat, before installing any Diesel Generator Set. Also requires GPCB NOC for emissions.'});
+  if (hv==='yes') elT.push({title:'Certification of HT / HV / EHV Electrical Installation',desc:' Mandatory certification from the Chief Electrical Inspector before energizing any High Tension, High Voltage, or Extra High Voltage installation under the Gujarat Electricity Act.'});
+  if (dg==='yes'||hv==='yes') elT.push({title:'New HT / LT Electrical Connection (DGVCL / UGVCL / MGVCL / PGVCL)',desc:' Separate application to the relevant DISCOM (Distribution Company) in Gujarat based on your district for new commercial or industrial electrical connection.'});
+  if (elT.length>0) {
+    state.push(buildCard({icon:'⚡',name:'Electrical and DG Set Approvals',dept:'Energy and Petrochemicals Department, Gujarat and Electrical Inspectorate',status:'required',
+      reason:`DG Set installation or HV electrical connection confirmed. The following approvals are <strong>mandatory</strong> from the Gujarat Electrical Inspectorate and the relevant DISCOM before commencing operations:`,
+      tags:[...(dg==='yes'?['DG Set Approval Required']:[]),...(hv==='yes'?['HV/EHV Certification Required']:[]),'Energy and Petrochem Dept'],
+      subItems:elT,link:'https://energy.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'⚡',name:'Electrical and DG Set Approvals',dept:'Energy and Petrochemicals Department, Gujarat',status:'not-required',
+      reason:`No DG Set installation or High Tension/High Voltage electrical installation indicated. Standard LT (Low Tension) commercial connection from your local DISCOM will suffice. No approvals from the Electrical Inspectorate are required at this stage.`,
+      tags:['No DG Set','No HT/HV Connection','LT Connection Sufficient'],link:'https://energy.gujarat.gov.in/'}));
+  }
+
+  // 9. GPCB
+  if (gpcb==='yes') {
+    const gs=[
+      {title:'Consent to Establish (CTE)',desc:' Mandatory from GPCB before starting construction or installation of any industrial plant under Water (Prevention and Control of Pollution) Act, 1974 and Air (Prevention and Control of Pollution) Act, 1981.'},
+      {title:'Consent to Operate (CTO)',desc:' Mandatory from GPCB before commencing operations of an industrial plant. Renewed periodically. Industry is categorised as Red, Orange, Green, or White based on pollution potential.'},
+    ];
+    if (haz==='yes') gs.push({title:'E-Waste and Hazardous Waste Authorization',desc:' Mandatory separate authorisation from GPCB under the Hazardous and Other Wastes (Management and Transboundary Movement) Rules, 2016 and E-Waste (Management) Rules, 2022 for generation, storage, treatment, or disposal of such waste.'});
+    state.push(buildCard({icon:'🌿',name:'GPCB Environmental Consents and Authorizations',dept:'Gujarat Pollution Control Board (GPCB), Forest and Environment Department',status:'required',
+      reason:`Your facility will generate <strong>industrial pollution including wastewater, air emissions, hazardous waste, or e-waste</strong>. GPCB consents are <strong>mandatory</strong> under the Water (Prevention and Control of Pollution) Act, 1974, Air (Prevention and Control of Pollution) Act, 1981, and Environment Protection Act, 1986. Non-compliance can result in closure orders and criminal prosecution.`,
+      tags:['Pollution Generated','GPCB Mandatory','Water Act 1974','Air Act 1981',...(haz==='yes'?['Haz/E-waste Auth Required']:[])],
+      subItems:gs,link:'https://gpcb.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'🌿',name:'GPCB Environmental Consents',dept:'Gujarat Pollution Control Board (GPCB)',status:'not-required',
+      reason:`No industrial pollution generation indicated. GPCB Consent to Establish and Consent to Operate are <strong>not required</strong> for your business at this stage. If operations change to include any pollution-generating activity such as wastewater discharge, air emissions, or hazardous waste generation, GPCB consent must be obtained before commencement.`,
+      tags:['No Industrial Pollution','Green/White Category Business','Not Applicable'],link:'https://gpcb.gujarat.gov.in/'}));
+  }
+
+  // 10. Factory License
+  const isMfg=biz==='manufacturing'||biz==='mixed';
+  if (isMfg&&hasemps==='yes'&&empcount>=10) {
+    state.push(buildCard({icon:'🏭',name:'Factory License',dept:'Directorate of Industrial Safety and Health (DISH), Labour Department, Gujarat',status:'required',
+      reason:`Your business is in <strong>manufacturing</strong> with <strong>${empcount} employees</strong>. A Factory License is <strong>mandatory</strong> under the Factories Act, 1948 for premises employing 10 or more workers using power, or 20 or more workers without power. The license must be obtained from DISH Gujarat before commencing operations. DISH also conducts periodic safety inspections of the premises.`,
+      tags:['Manufacturing Activity',`${empcount} Employees Declared`,'Factories Act 1948','DISH Gujarat Mandatory'],link:'https://dish.gujarat.gov.in/'}));
+  } else if (isMfg) {
+    state.push(buildCard({icon:'🏭',name:'Factory License',dept:'Directorate of Industrial Safety and Health (DISH), Labour Department, Gujarat',status:'conditional',
+      reason:`Your business is in <strong>manufacturing</strong> but currently below the Factory Act threshold (10 or more workers using power, or 20 or more without power). A Factory License is <strong>not required yet</strong> but will become mandatory once your workforce scales up. Current declared employee count: <strong>${hasemps==='yes'?empcount:'Not specified'}</strong>. Please monitor this threshold closely.`,
+      tags:['Manufacturing Activity','Below Threshold Currently','Monitor Employee Count','Future Requirement'],link:'https://dish.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'🏭',name:'Factory License',dept:'Directorate of Industrial Safety and Health (DISH), Labour Department, Gujarat',status:'not-required',
+      reason:`Your business is not a manufacturing unit. The Factories Act, 1948 and the associated Factory License requirement from DISH Gujarat are <strong>not applicable</strong> to service-based or trading businesses.`,
+      tags:['Non-manufacturing Business','Not Applicable'],link:'https://dish.gujarat.gov.in/'}));
+  }
+
+  // 11. Fire NOC
+  if (fire==='yes') {
+    state.push(buildCard({icon:'🚒',name:'Fire NOC (No Objection Certificate)',dept:'Gujarat Fire and Emergency Services, Home Department, Gujarat',status:'required',
+      reason:`You operate from a <strong>high-rise building, commercial complex, mall, hotel, hospital</strong> or handle <strong>hazardous or flammable materials</strong> on premises. A Fire NOC is <strong>mandatory</strong> under the Gujarat Fire Prevention and Life Safety Measures Act, 2013 and is required before obtaining the building use or occupancy certificate from the local authority. Annual renewal is required and the fire department conducts periodic safety inspections.`,
+      tags:['High-rise / Commercial Complex','Gujarat Fire Act 2013','Annual Renewal Required','Pre-Occupancy'],link:'https://fire.gujarat.gov.in/'}));
+  } else {
+    state.push(buildCard({icon:'🚒',name:'Fire NOC (No Objection Certificate)',dept:'Gujarat Fire and Emergency Services, Home Department, Gujarat',status:'not-required',
+      reason:`Your premises do not appear to be a high-rise building, commercial complex, or involve hazardous or flammable materials. A mandatory Fire NOC from Gujarat Fire Services is <strong>not required</strong> at this stage. However, basic fire safety compliance such as fire extinguishers and exit signage is always strongly recommended as good practice.`,
+      tags:['Ground-floor or Low-rise','No Hazardous Materials','Not Mandatory'],link:'https://fire.gujarat.gov.in/'}));
+  }
+
+  // RENDER
+  const allCards=[...central,...state];
+  const reqC=allCards.filter(h=>h.includes('badge-required')).length;
+  const recC=allCards.filter(h=>h.includes('badge-recommended')).length;
+  const naC=allCards.filter(h=>h.includes('badge-not-required')).length;
+  const conC=allCards.filter(h=>h.includes('badge-conditional')).length;
+  $('r-mandatory').textContent=reqC;
+  $('r-recommended').textContent=recC+conC;
+  $('r-notreq').textContent=naC;
+  $('r-total').textContent=allCards.length;
+  $('rdate').textContent='Generated: '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+  if (msme) {
+    $('msme-tier-div').innerHTML=`<div class="msme-tier-banner"><div class="msme-tier-icon">${msme==='Micro'?'🥉':msme==='Small'?'🥈':'🥇'}</div><div class="msme-tier-text"><div class="tier-label">MSME Classification (Composite Criteria Revised w.e.f. 1st April 2025)</div><div class="tier-val">${msme} Enterprise — Eligible for Udyam Registration</div><div class="tier-detail">Investment not more than ${msme==='Micro'?'₹2.5 Crore':msme==='Small'?'₹25 Crore':'₹125 Crore'} and Annual Turnover not more than ${msme==='Micro'?'₹10 Crore':msme==='Small'?'₹100 Crore':'₹500 Crore'}</div></div></div>`;
+  } else {
+    $('msme-tier-div').innerHTML=`<div class="msme-tier-banner"><div class="msme-tier-icon">ℹ️</div><div class="msme-tier-text"><div class="tier-label">MSME Classification (Revised w.e.f. 1st April 2025)</div><div class="tier-val" style="color:rgba(255,255,255,0.5)">Outside MSME Limits — Not Eligible for Udyam Registration</div><div class="tier-detail">Investment exceeds ₹125 Crore or Annual Turnover exceeds ₹500 Crore</div></div></div>`;
+  }
+
+  $('central-cards').innerHTML=central.join('');
+  $('state-cards').innerHTML=state.join('');
+  $('central-count').textContent=`(${central.length} Central approvals evaluated)`;
+  $('state-count').textContent=`(${state.length} Gujarat State approvals evaluated)`;
+  ['ps1','ps2','ps3','ps4'].forEach(id=>{ $(id).classList.add('done'); $(id).classList.remove('active'); });
+  const rs=$('results-section'); rs.style.display='block';
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetAll() {
+  ['turnover','investment','biztype','geography'].forEach(id=>$(id).value='');
+  ['iec','fssai','ecomm','pcr','weights','hasemps','municipal','fire','gpcb','hazwaste','dg','hv'].forEach(n=>{
+    document.querySelectorAll(`input[name="${n}"]`).forEach(el=>{ el.checked=el.value==='no'; });
+  });
+  $('empcount').value='';
+  $('emp-count-field').classList.remove('show');
+  $('gpcb-sub').classList.remove('show');
+  $('results-section').style.display='none';
+  ['ps1','ps2','ps3','ps4'].forEach((id,i)=>{ $(id).classList.remove('done','active'); if(i===0) $(id).classList.add('active'); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
