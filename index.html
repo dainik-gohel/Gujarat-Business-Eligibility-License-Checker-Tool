@@ -31,112 +31,9 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; font-size: 14px; line-height: 1.5; }
 
 /* ══════════════════════════════════════════════════════════
-   LOGIN OVERLAY
+   MAIN APP
 ══════════════════════════════════════════════════════════ */
-#login-overlay {
-  position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #0D1F3C 0%, #1B3F8B 50%, #0D1F3C 100%);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
-.login-geo {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(232,97,10,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 400px 300px at 10% 80%, rgba(27,63,139,0.4) 0%, transparent 60%);
-}
-.login-dots {
-  position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-.login-box {
-  background: white;
-  border-radius: 24px;
-  padding: 48px 44px;
-  width: 100%; max-width: 440px;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.35);
-  position: relative; z-index: 1;
-  animation: loginPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@keyframes loginPop {
-  from { opacity: 0; transform: scale(0.9) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.login-logo-row {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 28px; padding-bottom: 22px;
-  border-bottom: 1px solid var(--border);
-}
-.login-logo-icon {
-  width: 52px; height: 52px;
-  background: linear-gradient(135deg, var(--saffron), #C44A05);
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px; flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(232,97,10,0.3);
-}
-.login-logo-text { line-height: 1.35; }
-.login-logo-text .firm { font-size: 16px; font-weight: 800; color: var(--navy); letter-spacing: -0.2px; }
-.login-logo-text .sub { font-size: 11px; color: var(--slate); font-weight: 400; }
-.login-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 26px; color: var(--navy);
-  line-height: 1.25; margin-bottom: 6px; letter-spacing: -0.2px;
-}
-.login-title em { color: var(--saffron); font-style: italic; }
-.login-desc { font-size: 13px; color: var(--slate); font-weight: 300; margin-bottom: 28px; line-height: 1.6; }
-.login-beta {
-  display: inline-block;
-  background: var(--amber-light); color: var(--amber);
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.login-field { margin-bottom: 16px; }
-.login-field label {
-  display: block; font-size: 12px; font-weight: 700;
-  color: var(--slate); letter-spacing: 0.3px; text-transform: uppercase;
-  margin-bottom: 7px;
-}
-.login-field input {
-  width: 100%; padding: 13px 16px;
-  border: 1.5px solid var(--border); border-radius: 10px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px; color: var(--navy);
-  transition: border-color 0.18s, box-shadow 0.18s;
-  background: white;
-}
-.login-field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,63,139,0.1); }
-.login-err {
-  background: #FEF2F2; border: 1px solid #FECACA;
-  color: #991B1B; border-radius: 8px;
-  padding: 10px 14px; font-size: 12.5px; font-weight: 500;
-  margin-bottom: 16px; display: none;
-}
-.login-err.show { display: block; }
-.login-btn {
-  width: 100%; padding: 15px;
-  background: linear-gradient(135deg, var(--saffron), #C44A05);
-  color: white; border: none; border-radius: 10px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 15px; font-weight: 700; cursor: pointer;
-  letter-spacing: 0.1px;
-  box-shadow: 0 4px 16px rgba(232,97,10,0.35);
-  transition: transform 0.15s, box-shadow 0.15s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,10,0.45); }
-.login-footer {
-  text-align: center; margin-top: 20px;
-  font-size: 11.5px; color: #94A3B8; line-height: 1.6;
-}
-.login-footer strong { color: var(--slate); }
-
-/* ══════════════════════════════════════════════════════════
-   MAIN APP (hidden until login)
-══════════════════════════════════════════════════════════ */
-#app { display: none; }
+#app { display: block; }
 
 /* ── HEADER ─────────────────────────────────────────────────────── */
 .header { background: var(--navy); position: relative; overflow: hidden; }
@@ -399,41 +296,6 @@ select:focus, input:focus { outline: none; border-color: var(--primary); box-sha
 <body>
 
 <!-- ══════════════════════════════════════════════════════════
-     LOGIN OVERLAY
-══════════════════════════════════════════════════════════ -->
-<div id="login-overlay">
-  <div class="login-geo"></div>
-  <div class="login-dots"></div>
-  <div class="login-box">
-    <div class="login-logo-row">
-      <div class="login-logo-icon">⚖️</div>
-      <div class="login-logo-text">
-        <div class="firm">DGNM & Associates LLP</div>
-        <div class="sub">Chartered Accountants</div>
-      </div>
-    </div>
-    <div class="login-beta">🔒 Beta Access Required</div>
-    <div class="login-title">Gujarat Business<br><em>License Checker</em></div>
-    <p class="login-desc">Enter your access credentials to use the Gujarat Business Approval & License Eligibility Checker. Contact DGNM & Associates LLP to receive your credentials.</p>
-    <div class="login-err" id="login-err">⚠️ Invalid username or password. Please try again.</div>
-    <div class="login-field">
-      <label>Username</label>
-      <input type="text" id="login-user" placeholder="Enter username" autocomplete="username">
-    </div>
-    <div class="login-field">
-      <label>Password</label>
-      <input type="password" id="login-pass" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
-    <button class="login-btn" onclick="doLogin()">🔓 Access Tool</button>
-    <div class="login-footer">
-      <strong>Don't have credentials?</strong><br>
-      Contact DGNM & Associates LLP to request beta access.<br>
-      <span style="color:#CBD5E1;font-size:10.5px;">&copy; 2026 DGNM &amp; Associates LLP. Beta Version.</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
      MAIN APP
 ══════════════════════════════════════════════════════════ -->
 <div id="app">
@@ -450,9 +312,7 @@ select:focus, input:focus { outline: none; border-color: var(--primary); box-sha
           <div class="firm-type">Chartered Accountants</div>
         </div>
       </div>
-      <div class="header-user-pill" onclick="doLogout()">
-        <span>👤</span><span id="user-label">dgnm</span><span style="font-size:10px;color:rgba(255,255,255,0.5)">▼ Logout</span>
-      </div>
+      
     </div>
     <div class="header-tool-name">Gujarat Business License Eligibility Checker</div>
     <div class="header-title">Gujarat Business Approval &amp;<br><em>License Eligibility Checker</em></div>
@@ -773,37 +633,6 @@ select:focus, input:focus { outline: none; border-color: var(--primary); box-sha
 </div><!-- /app -->
 
 <script>
-// ── LOGIN ─────────────────────────────────────────────────────────────────────
-const CREDS = { username: 'dgnm', password: 'betaversion' };
-
-function doLogin() {
-  const u = document.getElementById('login-user').value.trim().toLowerCase();
-  const p = document.getElementById('login-pass').value.trim();
-  const err = document.getElementById('login-err');
-  if (u === CREDS.username && p === CREDS.password) {
-    err.classList.remove('show');
-    document.getElementById('login-overlay').style.animation = 'fadeOut 0.4s ease forwards';
-    setTimeout(() => {
-      document.getElementById('login-overlay').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      document.getElementById('user-label').textContent = u;
-    }, 380);
-  } else {
-    err.classList.add('show');
-    document.getElementById('login-pass').value = '';
-    document.getElementById('login-pass').focus();
-  }
-}
-
-function doLogout() {
-  if (confirm('Log out of Gujarat License Checker?')) {
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('login-overlay').style.cssText = 'display:flex;animation:loginPop 0.4s ease';
-    document.getElementById('login-user').value = '';
-    document.getElementById('login-pass').value = '';
-  }
-}
-
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
 const radio = name => document.querySelector(`input[name="${name}"]:checked`)?.value;
@@ -852,7 +681,6 @@ function buildCard({icon,name,dept,status,reason,tags,link,subItems}) {
     <div class="lcard-body">
       <p class="lcard-reason">${reason}</p>
       <div class="trigger-tags">${tagsH}</div>${subH}
-      ${link?`<a class="lcard-link" href="${link}" target="_blank" rel="noopener">Apply / More Info →</a>`:''}
     </div>
   </div>`;
 }
@@ -1021,7 +849,7 @@ function checkEligibility() {
       tags:['Ground-floor or Low-rise','No Hazardous Materials','Not Mandatory'],link:'https://fire.gujarat.gov.in/'}));
   }
 
-  // RENDER
+  // RENDER — filter to only show mandatory / recommended / conditional
   const allCards=[...central,...state];
   const reqC=allCards.filter(h=>h.includes('badge-required')).length;
   const recC=allCards.filter(h=>h.includes('badge-recommended')).length;
@@ -1031,6 +859,9 @@ function checkEligibility() {
   $('r-recommended').textContent=recC+conC;
   $('r-notreq').textContent=naC;
   $('r-total').textContent=allCards.length;
+  // Only display mandatory/recommended/conditional — strip not-required cards
+  const centralVisible=central.filter(h=>!h.includes('badge-not-required'));
+  const stateVisible=state.filter(h=>!h.includes('badge-not-required'));
   $('rdate').textContent='Generated: '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
 
   if (msme) {
@@ -1039,10 +870,10 @@ function checkEligibility() {
     $('msme-tier-div').innerHTML=`<div class="msme-tier-banner"><div class="msme-tier-icon">ℹ️</div><div class="msme-tier-text"><div class="tier-label">MSME Classification (Revised w.e.f. 1st April 2025)</div><div class="tier-val" style="color:rgba(255,255,255,0.5)">Outside MSME Limits — Not Eligible for Udyam Registration</div><div class="tier-detail">Investment exceeds ₹125 Crore or Annual Turnover exceeds ₹500 Crore</div></div></div>`;
   }
 
-  $('central-cards').innerHTML=central.join('');
-  $('state-cards').innerHTML=state.join('');
-  $('central-count').textContent=`(${central.length} Central approvals evaluated)`;
-  $('state-count').textContent=`(${state.length} Gujarat State approvals evaluated)`;
+  $('central-cards').innerHTML=centralVisible.join('');
+  $('state-cards').innerHTML=stateVisible.join('');
+  $('central-count').textContent=`(${centralVisible.length} of ${central.length} Central approvals applicable)`;
+  $('state-count').textContent=`(${stateVisible.length} of ${state.length} Gujarat State approvals applicable)`;
   ['ps1','ps2','ps3','ps4'].forEach(id=>{ $(id).classList.add('done'); $(id).classList.remove('active'); });
   const rs=$('results-section'); rs.style.display='block';
   rs.scrollIntoView({behavior:'smooth',block:'start'});
